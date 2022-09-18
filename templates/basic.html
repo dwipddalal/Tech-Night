@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		body {
+			background-color: #111827;
+			font-size: large;
+			color: white;
+		}
+
+		.hero {
+			background-color: #374151;
+			border: 2px black solid;
+			border-radius: 10px;
+			display: flex;
+			flex-direction: column;
+			margin: 2rem;
+			padding: 2rem;
+			justify-content: space-around;
+		}
+
+		.hero div{
+			display: flex;
+			flex-direction: row;
+			margin: auto;
+		}
+
+		form {
+			display: flex;
+			flex-direction: row;
+			margin: auto;
+			width: 80%;
+			justify-content: center;
+			align-items: center;
+		}
+
+		img {
+			/* width: 38rem; */
+			height: 20rem;
+			border-radius: 1rem;
+			margin: 1rem;
+		}
+
+		input,
+		textarea {
+			margin: 1rem;
+			padding: 1rem;
+			height: 1rem;
+			width: 40%;
+			border-radius: 1rem;
+			border: none;
+		}
+
+		button {
+			width: 8rem;
+			margin: 1rem;
+			padding: 1rem;
+			border-radius: 1rem;
+			border: none;
+			color: white;
+			background-color: #1d4ed8;
+			justify-content: center;
+			align-items: center;
+			font-weight: bold;
+			display: flex;
+			margin: 2rem auto;
+			cursor: pointer;
+		}
+
+		#currScore {
+			display: flex;
+			margin: auto;
+			color: white;
+		}
+
+		.leaderboard {
+			padding: 1.5rem;
+			margin: 1.7rem;
+			background-color: #1e293b;
+			border: 2px black solid;
+			border-radius: 1rem;
+		}
+
+		.trow {
+			display: flex;
+			width: 100%;
+			justify-content: space-around;
+			font-size: 1.2rem;
+			margin: 10px 0;
+		}
+
+		.trow div {
+			width: 100%;
+			text-align: center;
+		}
+	</style>
+	<title>Textify</title>
+</head>
+
+<body>
+
+	<div class="hero">
+		<form action="/" method="post">
+			<input type="text" name="name" id="name" placeholder="Enter Your Name" aria-label="Enter Your Name" />
+
+			<textarea type="text" name="imagedesc" id="imagedesc" placeholder="Enter Image description"
+				aria-label="Enter Image description"></textarea>
+
+			<button type="submit">Get Score</button>
+
+			
+		</form>
+
+		<div>
+			<div>
+				Image To Generate
+				<img src="{{url_for('static', filename='eyeImage.jpg')}}" />
+			</div>
+			<div>
+				Generate Image
+				<img src="{{url_for('static', filename='image.png')}}" />
+			</div>
+			<!-- <img src="../static/DeadpoolBulletShower.jpg" alt=""> -->
+			<!-- <img src="../static/DeadpoolBulletShower.jpg" alt=""> -->
+		</div>
+		<div id="currScore">
+			Your Score: {{ point }}
+		</div>
+	</div>
+
+
+
+	<div class="leaderboard">
+		<div class="trow" style="font-weight: bold; font-size: 1.4rem;margin: 1.2rem 0;">
+			<div>Rank</div>
+			<div>Name</div>
+			<!-- <div>Description</div> -->
+			<div>Score</div>
+		</div>
+		{% for elem in leaderboard %}
+		<div class="trow">
+			<div>{{loop.index}}</div>
+			<div>{{elem.name}}</div>
+			<!-- <div style="max-width: 24rem; overflow: hidden;">{{elem.content}}</div> -->
+			<div>{{elem.score}}</div>
+		</div>
+		{% endfor %}
+	</div>
+
+</body>
+
+</html>
